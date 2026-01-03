@@ -9,11 +9,15 @@ export const addActivityToStop = async (activityData) => {
     try {
         const { trip_stop_id, activity_id, custom_name, description, cost, category, date, time } = activityData;
 
+        // Convert empty strings to null for database
+        const dbDate = date === '' ? null : date;
+        const dbTime = time === '' ? null : time;
+
         const result = await query(
             `INSERT INTO trip_activities (trip_stop_id, activity_id, custom_name, description, cost, category, date, time)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING id, trip_stop_id, activity_id, custom_name, description, cost, category, date, time, created_at`,
-            [trip_stop_id, activity_id, custom_name, description, cost, category, date, time]
+            [trip_stop_id, activity_id, custom_name, description, cost, category, dbDate, dbTime]
         );
 
         return result.rows[0];
@@ -33,6 +37,10 @@ export const updateTripActivity = async (activityId, updates) => {
     try {
         const { custom_name, description, cost, category, date, time } = updates;
 
+        // Convert empty strings to null for database
+        const dbDate = date === '' ? null : date;
+        const dbTime = time === '' ? null : time;
+
         const result = await query(
             `UPDATE trip_activities
        SET custom_name = COALESCE($1, custom_name),
@@ -43,7 +51,7 @@ export const updateTripActivity = async (activityId, updates) => {
            time = COALESCE($6, time)
        WHERE id = $7
        RETURNING id, trip_stop_id, activity_id, custom_name, description, cost, category, date, time`,
-            [custom_name, description, cost, category, date, time, activityId]
+            [custom_name, description, cost, category, dbDate, dbTime, activityId]
         );
 
         if (result.rows.length === 0) {
