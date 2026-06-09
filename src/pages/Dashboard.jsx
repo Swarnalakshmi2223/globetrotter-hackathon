@@ -30,24 +30,24 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-slate-50">
             <Navbar />
 
-            <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">
+                        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 tracking-tight pb-1">
                             My Trips
                         </h1>
-                        <p className="text-gray-600 mt-1">
+                        <p className="text-slate-500 font-medium mt-1 text-lg">
                             Plan and manage your travel adventures
                         </p>
                     </div>
 
                     <Link
                         to="/trips/new"
-                        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                        className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-indigo-500/30 font-bold transform hover:-translate-y-0.5"
                     >
                         + Plan New Trip
                     </Link>
@@ -67,17 +67,17 @@ const Dashboard = () => {
                     </div>
                 ) : trips.length === 0 ? (
                     /* Empty State */
-                    <div className="text-center py-12 bg-white rounded-lg shadow">
-                        <div className="text-6xl mb-4">✈️</div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <div className="text-center py-20 bg-white rounded-2xl shadow-sm border border-slate-100">
+                        <div className="text-7xl mb-6 transform hover:scale-110 transition-transform cursor-default">✈️</div>
+                        <h3 className="text-2xl font-bold text-slate-800 mb-3">
                             No trips yet
                         </h3>
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-slate-500 mb-8 text-lg">
                             Start planning your next adventure!
                         </p>
                         <Link
                             to="/trips/new"
-                            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                            className="inline-block px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all font-bold shadow-lg shadow-blue-500/20 transform hover:-translate-y-0.5"
                         >
                             Plan Your First Trip
                         </Link>

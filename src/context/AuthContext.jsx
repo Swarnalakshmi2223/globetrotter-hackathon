@@ -22,17 +22,11 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (email, password, name) => {
         try {
-            const data = await signupAPI(email, password, name);
-            const { token: newToken, user: newUser } = data;
+            await signupAPI(email, password, name);
 
-            // Store in state
-            setToken(newToken);
-            setUser(newUser);
-
-            // Store in localStorage
-            localStorage.setItem('token', newToken);
-            localStorage.setItem('user', JSON.stringify(newUser));
-
+            // Do not automatically set token or user state
+            // Let the user manually login afterwards
+            
             return { success: true };
         } catch (error) {
             return {
